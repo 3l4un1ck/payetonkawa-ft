@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import {useCartStore} from "@/store/cartStore";
 
 const navItems = [
     { label: 'Home', href: '/' },
@@ -14,6 +15,8 @@ const navItems = [
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+    const { items } = useCartStore();
+    const total = items.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
         <nav className="w-full bg-[#0b0122] text-white shadow-sm fixed top-0 left-0 z-50">
@@ -47,8 +50,13 @@ export default function Navbar() {
 
                 {/* Mobile Menu */}
                 <div className="md:hidden flex items-center gap-4">
-                    <Link href="/cart" className="hover:text-purple-400">
-                        <ShoppingCart size={20} />
+                    <Link href="/cart" className="relative">
+                        <ShoppingCart className="w-6 h-6" />
+                        {total > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                                {total}
+                            </span>
+                        )}
                     </Link>
                     <Link href="/auth" className="hover:text-purple-400">
                         <User size={20} />

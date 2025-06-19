@@ -6,7 +6,7 @@ export const mockProducts: Product[] = [
         title: 'T-shirt blanc',
         description: 'Un t-shirt en coton bio, confortable et éco-responsable.',
         price: 19.99,
-        imageUrl: 'https://via.placeholder.com/300x300.png?text=T-shirt+blanc',
+        imageUrl: 'https://media.boohoo.com/i/boohooamplience/0304_SUMMER_FILLER_V2_LB5_DESK?qlt=default&fmt=auto',
         category: 'Vêtements',
     },
     {
@@ -22,7 +22,7 @@ export const mockProducts: Product[] = [
         title: 'Chaussures de sport',
         description: 'Confort optimal pour le sport ou la ville.',
         price: 89.99,
-        imageUrl: 'https://via.placeholder.com/300x300.png?text=Chaussures',
+        imageUrl: 'https://media.boohoo.com/i/boohoo/bmm40163_black_xl?w=675&qlt=default&fmt.jp2.qlt=70&fmt=auto&sm=fit',
         category: 'Chaussures',
     },
 ];

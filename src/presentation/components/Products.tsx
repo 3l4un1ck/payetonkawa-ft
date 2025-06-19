@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import {mockProducts} from "@/shared/mocks/products";
+import ProductCard from './ProductCard';
 
 export default function Products() {
     return (
@@ -23,15 +24,15 @@ export default function Products() {
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.15 }}
-                            className="bg-[#1e0735] p-4 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
                         >
-                            <img
-                                src={product.imageUrl}
-                                alt={product.title}
-                                className="w-full h-48 object-cover rounded-xl mb-4"
+                            <ProductCard
+                                product={{
+                                    id: product.id,
+                                    name: product.title,
+                                    image: product.imageUrl,
+                                    price: product.price,
+                                }}
                             />
-                            <h3 className="text-lg font-semibold mb-1">{product.title}</h3>
-                            <p className="text-purple-400 font-bold">${product.price.toFixed(2)}</p>
                         </motion.div>
                     ))}
                 </div>
