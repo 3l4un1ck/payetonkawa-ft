@@ -2,24 +2,24 @@
 
 import React from 'react';
 import Layout from "@/presentation/components/Layout";
-import About from "@/presentation/components/About";
-import PourquoiNousChoisir from "@/presentation/components/Wcu";
 import Newsletter from "@/presentation/components/Newsletter";
 import BannerWithBreadcrumb from "@/presentation/components/BannerWithBreadcrumb";
+import ProductCategories from "@/presentation/components/ProductCategories";
+import AllProducts from "@/presentation/components/AllProducts";
 
 
-export default function AboutPage() {
+export default function ShopPage() {
     return (
         <Layout>
             <BannerWithBreadcrumb
-                title="A propos"
+                title="Shop"
                 breadcrumbs={[
                     { label: "Accueil", href: "/" },
-                    { label: "A propos" }
+                    { label: "Shop" }
                 ]}
             />
-            <About />
-            <PourquoiNousChoisir />
+            <ProductCategories/>
+            <AllProducts/>
             <Newsletter/>
         </Layout>
     );

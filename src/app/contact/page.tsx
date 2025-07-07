@@ -2,9 +2,7 @@
 
 import React from 'react';
 import Layout from "@/presentation/components/Layout";
-import About from "@/presentation/components/About";
-import PourquoiNousChoisir from "@/presentation/components/Wcu";
-import Newsletter from "@/presentation/components/Newsletter";
+import ContactSection from "@/presentation/components/ContactSection";
 import BannerWithBreadcrumb from "@/presentation/components/BannerWithBreadcrumb";
 
 
@@ -12,15 +10,13 @@ export default function AboutPage() {
     return (
         <Layout>
             <BannerWithBreadcrumb
-                title="A propos"
+                title="Contact"
                 breadcrumbs={[
                     { label: "Accueil", href: "/" },
-                    { label: "A propos" }
+                    { label: "Contact" }
                 ]}
             />
-            <About />
-            <PourquoiNousChoisir />
-            <Newsletter/>
+            <ContactSection/>
         </Layout>
     );
 }
