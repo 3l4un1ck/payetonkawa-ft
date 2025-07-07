@@ -14,8 +14,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "PayeTonKawa",
-  description:
-    "Découvrez nos produits de café premium avec qualité exceptionnelle !",
+  description: "Découvrez nos produits de café premium avec qualité exceptionnelle !",
+  icons: {
+    icon: "/images/favicon.ico", // Chemin vers le favicon dans le dossier public
+    shortcut: "/favicon.ico", // Autre chemin pour personnalisation si nécessaire
+    apple: "/favicon.png", // Favicon spécifique pour appareils Apple (optionnel)
+  },
+
   openGraph: {
     title: "PayeTonKawa",
     description:
