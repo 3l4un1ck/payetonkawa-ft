@@ -31,6 +31,7 @@ export default function Products() {
                                     name: product.title,
                                     image: product.imageUrl,
                                     price: product.price,
+                                    quantity: product.quantity,
                                 }}
                             />
                         </motion.div>

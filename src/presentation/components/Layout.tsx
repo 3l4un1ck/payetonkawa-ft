@@ -2,6 +2,7 @@
 
 import React, {ReactNode} from 'react';
 import Navbar from "@/presentation/components/NavBar";
+import Footer from "@/presentation/components/Footer";
 
 
 type LayoutProps = {
@@ -19,10 +20,7 @@ export default function Layout({children}: LayoutProps) {
                 {children}
             </main>
 
-            {/* Footer */}
-            <footer className="py-4 bg-[#6F4E37] text-center text-sm text-white">
-                © 2025 PayetonKawa. All Rights Reserved.
-            </footer>
+            <Footer/>
         </div>
     );
 }

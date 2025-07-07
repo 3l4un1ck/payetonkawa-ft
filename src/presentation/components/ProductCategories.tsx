@@ -31,37 +31,37 @@ const topCategories = [
 const bottomCategories = [
     {
         id: 1,
-        image: '/images/cafe-grain.jpg',
+        image: '/images/HP-CAFE-GR.avif',
         title: 'Café en grain fraîchement torréfié',
         href: '/collections/acheter-cafe-en-grain',
     },
     {
         id: 2,
-        image: '/images/cafe-moulu.jpg',
+        image: '/images/cafemoulu.jpg',
         title: 'Nos Cafés Moulus',
         href: '/collections/cafe-moulu',
     },
     {
         id: 3,
-        image: '/images/thes.jpg',
+        image: '/images/COL-CUILL-T.avif',
         title: 'Boutique des thés',
         href: '/collections/thes',
     },
     {
         id: 4,
-        image: '/images/chocolat.jpg',
+        image: '/images/COL-CHOCS.avif',
         title: 'Chocolatiers – tablettes de chocolat grand cru',
         href: '/collections/chocolat',
     },
     {
         id: 5,
-        image: '/images/cafe-vert.jpg',
+        image: '/images/COL-CAFE-VERT.avif',
         title: 'Café vert',
         href: '/collections/cafe-vert',
     },
     {
         id: 6,
-        image: '/images/machine-cafe.jpg',
+        image: '/images/COL-ENT-CAF.avif',
         title: 'Machine à café à grains',
         href: '/collections/machine-cafe',
     },

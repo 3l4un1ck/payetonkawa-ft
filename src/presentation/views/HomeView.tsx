@@ -7,6 +7,8 @@ import About from "@/presentation/components/About";
 import CustomerReviews from "@/presentation/components/CustomerReviews";
 import PromoGrid from "@/presentation/components/PromoGrid";
 import ProductCategories from "@/presentation/components/ProductCategories";
+import PourquoiNousChoisir from "@/presentation/components/Wcu";
+import Newsletter from "@/presentation/components/Newsletter";
 
 export default function HomeView() {
 
@@ -15,10 +17,12 @@ export default function HomeView() {
             <Navbar/>
             <HeroSection />
             <About/>
+            <PourquoiNousChoisir/>
             <ProductCategories/>
             <Products/>
             <PromoGrid/>
             <CustomerReviews/>
+            <Newsletter/>
         </>
     );
 }

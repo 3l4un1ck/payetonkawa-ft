@@ -1,49 +1,89 @@
 'use client';
 
-import React from 'react';
-import Image from 'next/image';
+import { useRef, useEffect } from 'react';
+import { Award, Leaf, Sprout } from 'lucide-react';
 
-export default function About() {
+interface FeatureCardProps {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+    bgColor: string;
+}
+
+const FeatureCard = ({ icon, title, description, bgColor }: FeatureCardProps) => (
+    <div className="text-center p-6 bg-white rounded-2xl shadow-lg card-3d">
+        <div className={`w-16 h-16 ${bgColor} rounded-full flex items-center justify-center mx-auto mb-4`}>
+            {icon}
+        </div>
+        <h3 className="text-xl font-display font-semibold text-coffee-brown mb-2">{title}</h3>
+        <p className="text-gray-600">{description}</p>
+    </div>
+);
+
+export default function AboutSection() {
+    const revealRef = useRef(null);
+    const revealRef2 = useRef(null);
+
+    // Exemple d'effet d'apparition au scroll (si tu veux ajouter ça plus tard)
+    useEffect(() => {
+        // Tu peux ajouter intersection observer ici ou animation
+    }, []);
+
     return (
-        <section className="bg-gray-50 text-[#6F4E37] py-12">
-            <div className="max-w-7xl mx-auto px-4">
-                {/* Header */}
-                <h2 className="text-4xl font-bold text-center mb-6">
-                    About <span className="text-[#d7b899]">Us</span>
-                </h2>
+        <section id="about" className="py-20 bg-coffee-cream mt-4">
+            <div className="container mx-auto px-4">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-                <p className="text-center text-lg text-[#8d735a] mb-12">
-                    Learn more about who we are, our mission, and what we strive to achieve.
-                </p>
-
-                {/* Content */}
-                <div className="flex flex-col md:flex-row items-center gap-8">
-                    {/* Left Section - Image */}
-                    <div className="relative rounded-lg overflow-hidden shadow-md w-full md:w-1/2 max-h-[400px]">
-                        <Image
-                            src="/images/coffee.png"
-                            alt="About Us"
-                            width={700}
-                            height={700}
-                            className=""
-                        />
+                    {/* Image à gauche */}
+                    <div className="reveal" ref={revealRef}>
+                        <div className="relative">
+                            <img
+                                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+                                alt="Professional coffee roasting equipment"
+                                className="rounded-3xl shadow-2xl"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-tr from-coffee-brown/20 to-transparent rounded-3xl"></div>
+                        </div>
                     </div>
 
-                    {/* Right Section - Text Content */}
-                    <div className="w-full md:w-1/2">
-                        <h3 className="text-2xl font-semibold mb-4">
+                    {/* Texte + Features */}
+                    <div className="space-y-6 reveal" ref={revealRef2}>
+                        <h2 className="text-4xl lg:text-5xl font-display font-bold text-coffee-brown">
                             Who We Are
-                        </h3>
-                        <p className="text-[#8d735a] mb-4">
-                            We are a passionate team dedicated to delivering innovative solutions that make life better
-                            for the people we serve. Our vision is to create a future where technology brings
-                            communities closer together.
+                        </h2>
+                        <p className="text-lg text-gray-700 leading-relaxed">
+                            We are a passionate team dedicated to delivering innovative solutions that make life
+                            better for the people we serve. Our vision is to create a future where technology
+                            brings communities closer together.
                         </p>
-                        <p className="text-[#8d735a]">
-                            At the heart of everything we do is our commitment to excellence, innovation, and integrity.
-                            Join us as we continue to grow and make a lasting impact.
+                        <p className="text-lg text-gray-700 leading-relaxed">
+                            At the heart of everything we do is our commitment to excellence, innovation, and
+                            integrity. Join us as we continue to grow and make a lasting impact.
                         </p>
+
+                        {/*/!* Feature Cards *!/*/}
+                        {/*<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">*/}
+                        {/*    <FeatureCard*/}
+                        {/*        icon={<Sprout className="text-white" size={24} />}*/}
+                        {/*        title="Cafés à petits prix"*/}
+                        {/*        description="Du café artisanal à bon prix ? C'est possible ! Découvrez notre sélection de cafés économiques."*/}
+                        {/*        bgColor="bg-coffee-brown"*/}
+                        {/*    />*/}
+                        {/*    <FeatureCard*/}
+                        {/*        icon={<Leaf className="text-white" size={24} />}*/}
+                        {/*        title="Cafés BIO équitables"*/}
+                        {/*        description="Notre sélection de café en grain bio est composée de cafés issus de l'agriculture responsable."*/}
+                        {/*        bgColor="bg-coffee-accent"*/}
+                        {/*    />*/}
+                        {/*    <FeatureCard*/}
+                        {/*        icon={<Award className="text-white" size={24} />}*/}
+                        {/*        title="Cafés d'exception"*/}
+                        {/*        description="Notre gamme de café d'exception est composée de cafés rares de petites exploitations."*/}
+                        {/*        bgColor="bg-coffee-dark"*/}
+                        {/*    />*/}
+                        {/*</div>*/}
                     </div>
+
                 </div>
             </div>
         </section>

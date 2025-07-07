@@ -15,27 +15,21 @@ type PromoItem = {
 const promoItems: PromoItem[] = [
     {
         id: 1,
-        image: '/images/shiny-blend.jpg',
+        image: '/images/1131w-WGfuVqeyaLM.webp',
     },
     {
         id: 2,
-        title: 'Découvrez nos bouilloires',
-        image: '/images/bouilloires.jpg',
-        buttonLabel: 'JE FONCE',
-        buttonHref: '/bouilloires',
+        image: '/images/BNR-bouilloire.webp',
     },
     {
         id: 3,
-        title: 'COMANDANTE',
-        image: '/images/comandante.jpg',
-        buttonLabel: 'JE DÉCOUVRE',
-        buttonHref: '/comandante',
+        image: '/images/comandante.webp',
     },
     {
         id: 4,
-        title: 'My Perfect Coffee',
-        description: 'Répondez à quelques questions pour trouver le café qui vous convient.',
-        image: '/images/perfect-coffee.jpg',
+        title: 'My perfect tea',
+        description: 'Découvrez nos thé thai.',
+        image: '/images/banner_the_chai.webp',
         buttonHref: '/quizz',
     },
 ];
@@ -64,7 +58,7 @@ export default function PromoGrid() {
                             fill
                             className="object-cover"
                         />
-                        <div className="absolute inset-0 bg-black/40 text-white flex flex-col justify-center items-center p-4 text-center">
+                        <div className="absolute inset-0  text-white flex flex-col justify-center items-center p-4 text-center">
                             {item.title && <h3 className="text-lg font-bold mb-2">{item.title}</h3>}
                             {item.description && (
                                 <p className="text-sm mb-2">{item.description}</p>

@@ -71,9 +71,9 @@ export default function CartPage() {
                     <h3 className="text-xl font-bold">Total : {totalPrice.toFixed(2)} €</h3>
                     <button
                         onClick={clearCart}
-                        className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                        className="bg-[#6F4E37] text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
                     >
-                        Vider le panier
+                        Valider la commande
                     </button>
                 </div>
             </div>
