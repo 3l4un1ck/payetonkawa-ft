@@ -64,7 +64,7 @@ export default function Navbar() {
                         )}
                     </Link>
                     <Link
-                        href="/auth"
+                        href="/login"
                         className="bg-[#6F4E37] hover:bg-[#8d6140] text-white px-4 py-2 rounded-md text-sm font-semibold"
                     >
                         Join Now
@@ -106,7 +106,7 @@ export default function Navbar() {
                         </Link>
                     ))}
                     <Link
-                        href="/auth"
+                        href="/login"
                         className="bg-[#d7b899] hover:bg-[#b08b5c] px-4 py-2 rounded-full text-sm text-[#6F4E37] font-semibold mt-4"
                     >
                         Join Now
