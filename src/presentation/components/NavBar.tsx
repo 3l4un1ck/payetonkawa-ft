@@ -7,9 +7,9 @@ import { Menu, X, ShoppingCart, Coffee } from 'lucide-react';
 import { useCartStore } from "@/store/cartStore";
 
 const navItems = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Shop', href: '/shop' },
+    { label: 'Accueil', href: '/' },
+    { label: 'A propos', href: '/about' },
+    { label: 'Nos produits', href: '/shop' },
     { label: 'Contact', href: '/contact' },
 ];
 
