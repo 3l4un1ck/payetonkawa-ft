@@ -1,7 +1,5 @@
-const BASE_URL = 'https://api.maboutique.com';
-
-export async function fetcher<T>(url: string, options?: RequestInit): Promise<T> {
-    const res = await fetch(`${BASE_URL}${url}`, {
+export async function fetcher<T>(base_url: string, url: string, options?: RequestInit): Promise<T> {
+    const res = await fetch(`${base_url}${url}`, {
         ...options,
         headers: {
             'Content-Type': 'application/json',

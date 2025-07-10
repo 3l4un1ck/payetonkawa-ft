@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "../../store/authStore";
-import { ApiOrderRepository } from "../../infrastructure/repositories/ApiOrderRepository";
+import { LocalOrderRepository } from "../../infrastructure/repositories/LocalOrderRepository";
 import { GetCustomerOrders } from "../../application/usecases/GetCustomerOrders";
 import { Order } from "../../domain/entities/Order";
+import Layout from "@/presentation/components/Layout";
 
-const orderRepository = new ApiOrderRepository();
+const orderRepository = new LocalOrderRepository();
 const getCustomerOrders = new GetCustomerOrders(orderRepository);
 
 export default function OrdersPage() {
@@ -39,49 +40,51 @@ export default function OrdersPage() {
   if (!isAuthenticated) return null;
 
   return (
-    <div className="min-h-screen bg-[#f7efe6] py-12 px-4 md:px-12">
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold text-[#6F4E37] mb-6 text-center">Mes Commandes</h2>
+      <Layout>
+        <div className="min-h-screen bg-[#f7efe6] py-12 mt-9 px-4 md:px-12">
+          <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md">
+            <h2 className="text-2xl font-bold text-[#6F4E37] mb-6 text-center">Mes Commandes</h2>
 
-        {loading && <div className="text-center text-[#6F4E37]">Chargement...</div>}
+            {loading && <div className="text-center text-[#6F4E37]">Chargement...</div>}
 
-        {error && <div className="text-red-600 text-center mb-4">{error}</div>}
+            {error && <div className="text-red-600 text-center mb-4">{error}</div>}
 
-        {!loading && orders.length === 0 && (
-          <div className="text-center text-[#6F4E37]">Aucune commande trouvée.</div>
-        )}
+            {!loading && orders.length === 0 && (
+              <div className="text-center text-[#6F4E37]">Aucune commande trouvée.</div>
+            )}
 
-        {!loading && orders.length > 0 && (
-          <ul className="space-y-6">
-            {orders.map((order) => (
-              <li key={order.id} className="border border-[#d7b899] rounded-md p-4 bg-[#fdfbf9]">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="font-semibold text-[#4b3621]">
-                    Commande #{order.id}
-                  </span>
-                  <span className="text-sm text-[#6F4E37]">
-                    {new Date(order.createdAt).toLocaleString()}
-                  </span>
-                </div>
-                <div className="text-[#6F4E37] mb-2">
-                  <span className="font-medium">Statut :</span> {order.status}
-                </div>
-                <div className="text-[#6F4E37] mb-2">
-                  <span className="font-medium">Total :</span> {order.total.toFixed(2)} €
-                </div>
+            {!loading && orders.length > 0 && (
+              <ul className="space-y-6">
+                {orders.map((order) => (
+                  <li key={order.id} className="border border-[#d7b899] rounded-md p-4 bg-[#fdfbf9]">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-semibold text-[#4b3621]">
+                        Commande #{order.id}
+                      </span>
+                      <span className="text-sm text-[#6F4E37]">
+                        {new Date(order.createdAt).toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="text-[#6F4E37] mb-2">
+                      <span className="font-medium">Statut :</span> {order.status}
+                    </div>
+                    <div className="text-[#6F4E37] mb-2">
+                      <span className="font-medium">Total :</span> {order.total.toFixed(2)} €
+                    </div>
 
-                <ul className="pl-4 list-disc text-[#4b3621]">
-                  {order.items.map((item) => (
-                    <li key={item.productId} className="text-sm">
-                      {item.name} x{item.quantity} – {item.price.toFixed(2)} €/u
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
+                    <ul className="pl-4 list-disc text-[#4b3621]">
+                      {order.items.map((item) => (
+                        <li key={item.productId} className="text-sm">
+                          {item.name} x{item.quantity} – {item.price.toFixed(2)} €/u
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+        </Layout>
   );
 }

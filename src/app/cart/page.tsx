@@ -2,7 +2,11 @@
 
 import Layout from "@/presentation/components/Layout";
 import { useCartStore } from '@/store/cartStore';
+import { useAuthStore } from '@/store/authStore';
+import { OrderService } from '@/application/services/OrderService';
 import { Trash2, Minus, Plus } from 'lucide-react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function CartPage() {
     const {
@@ -12,15 +16,45 @@ export default function CartPage() {
         increaseQuantity,
         decreaseQuantity,
     } = useCartStore();
+    
+    const { customer } = useAuthStore();
+    const router = useRouter();
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [error, setError] = useState('');
 
     const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-    if (items.length === 0)
+    const handleCheckout = async () => {
+        if (!customer?.email) {
+            setError('Vous devez être connecté pour passer une commande');
+            return;
+        }
+
+        setIsProcessing(true);
+        setError('');
+
+        try {
+            const orderService = new OrderService();
+            await orderService.createOrderFromCart(customer, items);
+            clearCart();
+            window.location.href = "https://buy.stripe.com/test_bJe8wO9yAc2O5JRa404AU00";
+            // router.push('/orders');
+        } catch (err: any) {
+            setError(err.message || 'Erreur lors de la création de la commande');
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    if (items.length === 0) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center text-center">
-                <h2 className="text-2xl font-bold">Votre panier est vide 🛒</h2>
-            </div>
+            <Layout>
+                <div className="min-h-screen flex flex-col items-center justify-center text-center">
+                    <h2 className="text-2xl font-bold">Votre panier est vide 🛒</h2>
+                </div>
+            </Layout>
         );
+    }
 
     return (
         <Layout>
@@ -67,14 +101,29 @@ export default function CartPage() {
                     ))}
                 </div>
 
+                {error && (
+                    <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                        {error}
+                    </div>
+                )}
+
                 <div className="mt-6 flex items-center justify-between border-t pt-4">
                     <h3 className="text-xl font-bold">Total : {totalPrice.toFixed(2)} €</h3>
-                    <button
-                        onClick={clearCart}
-                        className="bg-[#6F4E37] text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
-                    >
-                        Valider la commande
-                    </button>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={clearCart}
+                            className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition"
+                        >
+                            Vider le panier
+                        </button>
+                        <button
+                            onClick={handleCheckout}
+                            disabled={isProcessing}
+                            className="bg-[#6F4E37] text-white px-4 py-2 rounded-lg hover:bg-[#5a3f2e] transition disabled:opacity-50"
+                        >
+                            {isProcessing ? 'Traitement...' : 'Valider la commande'}
+                        </button>
+                    </div>
                 </div>
             </div>
         </Layout>

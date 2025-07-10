@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "../../store/authStore";
-import { ApiCustomerRepository } from "../../infrastructure/repositories/ApiCustomerRepository";
+import { LocalCustomerRepository } from "../../infrastructure/repositories/LocalCustomerRepository";
 import { RegisterCustomer } from "../../application/usecases/RegisterCustomer";
 import { Customer } from "../../domain/entities/Customer";
 
-const customerRepository = new ApiCustomerRepository();
+const customerRepository = new LocalCustomerRepository();
 const registerCustomer = new RegisterCustomer(customerRepository);
 
 const initialAddress = {
@@ -30,6 +30,7 @@ export default function RegisterPage() {
 
   const [error, setError] = useState("");
   const login = useAuthStore((state) => state.login);
+  const setCustomer = useAuthStore((state) => state.setCustomer);
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +51,8 @@ export default function RegisterPage() {
     try {
       const { token } = await registerCustomer.execute(form as Customer);
       login(token);
+      const profile = await customerRepository.getProfile(token);
+      setCustomer(profile);
       router.push("/orders");
     } catch (err: any) {
       setError(err.message || "Erreur lors de l'inscription");
@@ -138,3 +141,7 @@ export default function RegisterPage() {
     </div>
   );
 }
+function setCustomer(profile: Customer) {
+  throw new Error("Function not implemented.");
+}
+

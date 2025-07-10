@@ -5,6 +5,7 @@ export class GetAllProducts {
     constructor(private productRepo: ProductRepository) {}
 
     async execute(): Promise<Product[]> {
-        return this.productRepo.getAll();
+        // return this.productRepo.getAll();
+        return [];
     }
 }

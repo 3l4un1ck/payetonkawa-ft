@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { Customer } from '../domain/entities/Customer';
 
 interface AuthState {
@@ -10,11 +11,18 @@ interface AuthState {
   setCustomer: (customer: Customer) => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  token: null,
-  isAuthenticated: false,
-  customer: null,
-  login: (token) => set({ token, isAuthenticated: true }),
-  logout: () => set({ token: null, isAuthenticated: false, customer: null }),
-  setCustomer: (customer) => set({ customer }),
-})); 
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      token: null,
+      isAuthenticated: false,
+      customer: null,
+      login: (token) => set({ token, isAuthenticated: true }),
+      logout: () => set({ token: null, isAuthenticated: false, customer: null }),
+      setCustomer: (customer) => set({ customer }),
+    }),
+    {
+      name: 'auth-storage', // clé dans le localStorage
+    }
+  )
+);

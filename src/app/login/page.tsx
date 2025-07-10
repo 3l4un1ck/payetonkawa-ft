@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "../../store/authStore";
-import { ApiCustomerRepository } from "../../infrastructure/repositories/ApiCustomerRepository";
+import { LocalCustomerRepository } from "../../infrastructure/repositories/LocalCustomerRepository";
 import { LoginCustomer } from "../../application/usecases/LoginCustomer";
 
-const customerRepository = new ApiCustomerRepository();
+const customerRepository = new LocalCustomerRepository();
 const loginCustomer = new LoginCustomer(customerRepository);
 
 export default function LoginPage() {
@@ -14,6 +14,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const login = useAuthStore((state) => state.login);
+  const setCustomer = useAuthStore((state) => state.setCustomer);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,7 +23,9 @@ export default function LoginPage() {
     try {
       const { token } = await loginCustomer.execute(email, password);
       login(token);
-      router.push("/orders");
+      const profile = await customerRepository.getProfile(token);
+      setCustomer(profile);
+      router.push("/");
     } catch (err: any) {
       setError(err.message || "Erreur lors de la connexion");
     }
